@@ -19,14 +19,19 @@
 
 - (IBAction)digitPressed:(UIButton *)sender
 {
-    NSString *digit = [[sender titleLabel] text];
+    // orig assignment - NSString *digit = [[sender titleLabel] text];
+    NSString *digit = sender.titleLabel.text;
+    int iDig = [digit intValue];
+    NSLog(@"The digit is %d.", iDig);
     
     if (userIsInTheMiddleOfTypingANumber) {
-        [display setText:[[display text] stringByAppendingString:digit]];
+       // orig assignment - [display setText:[[display text] stringByAppendingString:digit]];
+        display.text = [display.text stringByAppendingString:digit];
     }
     else
     {
-        [display setText:digit];
+        // orig assignment - [display setText:digit];
+        display.text = digit;
         userIsInTheMiddleOfTypingANumber = YES;
     }
 }
@@ -34,12 +39,18 @@
 - (IBAction)operationPressed:(UIButton *)sender
 {
     if (userIsInTheMiddleOfTypingANumber) {
-        [[self brain] setOperand:[[display text] doubleValue]];
+        // original assignment
+        //[[self brain] setOperand:[[display text] doubleValue]];
+        // new impl in demo - won't work with the setOperand method in .h - error - need @property there
+        // [self brain].operand = [[display text] doubleValue];
+        [self brain].operand = [display.text doubleValue];
         userIsInTheMiddleOfTypingANumber = NO;
     }
-    NSString *operation  =  [[sender titleLabel] text];
+    // orig assignment - NSString *operation  =  [[sender titleLabel] text];
+    NSString *operation = sender.titleLabel.text;
     double result = [[self brain] performOperation:operation];
-    [display setText:[NSString stringWithFormat:@"%g", result]];
+    // orig assignment - [display setText:[NSString stringWithFormat:@"%g", result]];
+    display.text = [NSString stringWithFormat:@"%g", result];
     // output to console example: NSLog(@"The answer to %@, the universe and everything is %d.", @"life", 42);
 }
 

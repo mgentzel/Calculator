@@ -10,14 +10,16 @@
 
 
 @interface CalculatorBrain : NSObject {
-    
+@private
     double operand;
     NSString *waitingOperation;
     double waitingOperand;
     
 }
-
-- (void)setOperand:(double)aDouble;
+// handles getter/setter as properties
+@property double operand;
+// new demo - dot notation won't work when implementing this way - need the @property above - 
+//- (void)setOperand:(double)aDouble;
 - (double)performOperation:(NSString *)operation;
 
 @end

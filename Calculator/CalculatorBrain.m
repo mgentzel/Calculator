@@ -10,11 +10,12 @@
 
 
 @implementation CalculatorBrain
-
-- (void)setOperand:(double)aDouble
-{
-    operand = aDouble;
-}
+@synthesize operand;
+// orig assignment - will use @synthesize instead
+//- (void)setOperand:(double)aDouble
+//{
+//    operand = aDouble;
+//}
 
 // private
 - (void)performWaitingOperation
