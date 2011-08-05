@@ -8,14 +8,24 @@
 
 #import "CalculatorBrain.h"
 
+// allows private @properties or methods - the '()' is the operator needed
+@interface CalculatorBrain()
+@property double newOperand;
+// implemented below - after the method it calls
+- (void)doSomethingPrivate;
+@end
+
 
 @implementation CalculatorBrain
 @synthesize operand;
+@synthesize newOperand;
 // orig assignment - will use @synthesize instead
 //- (void)setOperand:(double)aDouble
 //{
 //    operand = aDouble;
 //}
+
+
 
 // private
 - (void)performWaitingOperation
@@ -59,6 +69,12 @@
     
     
     return operand;
+}
+
+// if this is implemented before the method it calls the compiler complains about not finding it
+- (void)doSomethingPrivate
+{
+    [self performWaitingOperation];
 }
 
 @end
